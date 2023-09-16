@@ -54,7 +54,7 @@ DISTRIBUTESECRET=secretcodetodistributeBCHand_tokens
 PORT=8083
 ```
 
-Once you’ve created your .env file in the root dir of your app, load up a wallet you will use for the faucet with some BCH (for tx fees) & your tokens (all in one transaction). Once that transaction has at least 1 confirmation, you can build & run your application to test it out.
+Once you’ve created your .env file in the root dir of your app, load up a wallet you will use for the faucet with some XEC (for tx fees) & your tokens (all in one transaction). Once that transaction has at least 1 confirmation, you can build & run your application to test it out.
 
 Before you run your app, you will need to install dependencies (NPM to install dependencies), build & run your app from the command line. Open up a prompt, go to the root directory of your slp-faucet and run the below commands:
 
@@ -72,7 +72,7 @@ Before you run your app, you will need to install dependencies (NPM to install d
 
 The first time you use your SLP Faucet, you will need to enter your distribute_secret into the SLP address input and submit it. This will set up your Faucet wallet for use.This faucet can service 450 uses per block (i.e., 25 txn limit/block x 18 addresses = 450).
 
-The server application allows the faucet admin to automatically distribute the tokens and BCH evenly across the first 18 addresses which are located on the `m/44'/245'/0'/0/X` HD path, where `X` is the address indices 0 to 17. The admin can instantiate this automatic distribution by entering the `DISTRIBUTE_SECRET` environment variable into the site’s address input field.
+The server application allows the faucet admin to automatically distribute the tokens and XEC evenly across the first 18 addresses which are located on the `m/44'/245'/0'/0/X` HD path, where `X` is the address indices 0 to 17. The admin can instantiate this automatic distribution by entering the `DISTRIBUTE_SECRET` environment variable into the site’s address input field.
 
 After you’ve waited 1 confirmation, you are ready to enter an SLP address and test out your SLP Faucet. If you get an error then try to troubleshoot based on the error. When it is working, you will be ready to move your node.js app to a server so that the internet can reach it. Check all your changes into your GitHub repository fork so that you can access your code later.
 
@@ -170,7 +170,7 @@ pm2 restart my-app
 
 Troubleshoot any errors you get and go from there. Using `pm2 show app-name` will give you the path to all your server logs (server-out.log and server-error.log) if you want to check them to troubleshoot. If all works well, you should be able to visit your DNS URL that you set up and be directed to your node.js application. An example is the SOUR SLP Faucet at [http://sour-faucet.ddns.net](http://sour-faucet.ddns.net)
 
-As long as you have BCH & Tokens in your faucet, it should work without any issues. If the faucet does run out of BCH, just send more to the first BCH address (index 0, the next one or two may also work) and then restart the server: `pm2 restart app-name` Any update to your index.ejs file will automatically be applied without a restart. Any updates to the .env file requires a restart & updates to .ts files requires a rebuild (tsc) then a restart:
+As long as you have XEC & Tokens in your faucet, it should work without any issues. If the faucet does run out of XEC, just send more to the first XEC address (index 0, the next one or two may also work) and then restart the server: `pm2 restart app-name` Any update to your index.ejs file will automatically be applied without a restart. Any updates to the .env file requires a restart & updates to .ts files requires a rebuild (tsc) then a restart:
 
 `pm2 restart server.js`
 

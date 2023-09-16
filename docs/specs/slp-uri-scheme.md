@@ -73,10 +73,10 @@ Please see the BNF grammar above for the normative syntax.
 * **Request 10.0001 XYZ tokens to "Satoshi-Nakamoto":**
   * `simpleledger:qqmtw4c35mpv5rcjnnsrskpxvzajyq3f9ygldn8fj0?amount1=10.0001-<xyzTokenID>&label=Satoshi-Nakamoto`
 
-* **Request 20.30 BCH & 1000 XYZ tokens to "Satoshi-Nakamoto":**
+* **Request 20.30 XEC & 1000 XYZ tokens to "Satoshi-Nakamoto":**
   * `simpleledger:qqmtw4c35mpv5rcjnnsrskpxvzajyq3f9ygldn8fj0?amount=20.3&amount2=1000-<xyzTokenID>&label=Satoshi-Nakamoto`
 
-* **Request 50 BCH & 1 ABC token with message:**
+* **Request 50 XEC & 1 ABC token with message:**
   * `simpleledger:qqmtw4c35mpv5rcjnnsrskpxvzajyq3f9ygldn8fj0?amount1=50&amount2=1-<abcTokenID>&label=Satoshi-Nakamoto&message=Donation%20for%20project%20xyz`
 
 * **Request any 1 NFT token from group XYZ (using "isgroup"):**

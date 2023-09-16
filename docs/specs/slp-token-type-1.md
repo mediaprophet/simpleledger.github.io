@@ -115,7 +115,7 @@ The protocol defines 4 types of token transactions, which are contained within t
 The first 2 token transaction types (genesis and extended minting) define and issue the token.  The third transaction type is the most common (send); it allows users to transfer tokens.
 The final transaction type (checksum commitment) is a supplement to the basic consensus model.
 
-Like most "colored coins" protocols, SLP associates token amounts with real BCH transaction outputs, but with a token amount that is independent from the BCH amount.  Since Bitcoin transactions usually have multiple outputs, the OP_RETURN message specifies how many tokens are being assigned to which outputs.
+Like most "colored coins" protocols, SLP associates token amounts with real XEC transaction outputs, but with a token amount that is independent from the XEC amount.  Since Bitcoin transactions usually have multiple outputs, the OP_RETURN message specifies how many tokens are being assigned to which outputs.
 
 Besides defining a format for the OP_RETURN message, the protocol also defines consensus rules that determine the validity of a token send transaction or extended minting transaction  (see Consensus Rules section below).
 
@@ -227,7 +227,7 @@ This document specifies the rules and operation of the Permissionless Token Type
 
 `mint_baton_vout`: Future token supply increases are made possible if the genesis endows a specific transaction output with a "minting baton" that can be passed along and used for future minting (using 'MINT' transactions, see below). If `mint_baton_vout` is not present or refers to a nonexistent output, then the baton does not exist and the token provably has a one-time issuance.
 
-`decimals`: indicates that 1 token is divisible into 10^`decimals` base units. SLP messages store whole numbers indicating token amounts as measured in the base unit, analogous to how bitcoin transactions store BCH amounts measured in the base unit 'satoshis'. With a token FOO having `decimals` of 6 indicated in the genesis, for example, the quantity 12.53 FOO (as displayed in wallet software) would be represented by 12530000 base units (as 8 bytes, hex 0000000000bf3150). A `decimals` of 8 would give the same divisibility as bitcoin, whereas 0 would give indivisible tokens.
+`decimals`: indicates that 1 token is divisible into 10^`decimals` base units. SLP messages store whole numbers indicating token amounts as measured in the base unit, analogous to how bitcoin transactions store XEC amounts measured in the base unit 'satoshis'. With a token FOO having `decimals` of 6 indicated in the genesis, for example, the quantity 12.53 FOO (as displayed in wallet software) would be represented by 12530000 base units (as 8 bytes, hex 0000000000bf3150). A `decimals` of 8 would give the same divisibility as bitcoin, whereas 0 would give indivisible tokens.
 
 The genesis transaction includes an initial minting of `initial_token_mint_quantity` base units, placed on the second transaction output (vout=1).
 
@@ -235,7 +235,7 @@ The genesis transaction includes an initial minting of `initial_token_mint_quant
 
 **Transaction outputs**:
 
-| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                                                                                                                                                                                                                                            | BCH amount | Implied token amount (base units) |
+| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                                                                                                                                                                                                                                            | XEC amount | Implied token amount (base units) |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|-----------------------------------|
 | 0    | OP_RETURN<br>&lt;lokad_id: 'SLP\x00'&gt; (4 bytes, ascii)<sup>1</sup><br>&lt;token_type: 1&gt; (1 to 2 byte integer)<br>&lt;transaction_type: 'GENESIS'&gt; (7 bytes, ascii)<br>&lt;token_ticker&gt; (0 to ∞ bytes, suggested utf-8)<br>&lt;token_name&gt; (0 to ∞ bytes, suggested utf-8)<br>&lt;token_document_url&gt; (0 to ∞ bytes, suggested ascii)<br>&lt;token_document_hash&gt; (0 bytes or 32 bytes)<br>&lt;decimals&gt; (1 byte in range 0x00-0x09)<br>&lt;mint_baton_vout&gt; (0 bytes, or 1 byte in range 0x02-0xff)<br>&lt;initial_token_mint_quantity&gt; (8 byte integer)<br>| any<sup>2</sup>       | 0                                 |
 | 1    | Initial mint receiver                                                                                                                                                                                                                                                                                                                                                                                                                                                               | any<sup>2</sup>       | initial_token_mint_quantity       |
@@ -248,7 +248,7 @@ The genesis transaction includes an initial minting of `initial_token_mint_quant
 
 <sup>1. The Lokad identifier is registered as the number 0x504c53 (which, when encoded in the 4-byte little-endian format expected for Lokad IDs, gives the ascii string 'SLP\x00'). Inquiries and additional information about the Lokad system of OP_RETURN protocol identifiers can be found at [https://github.com/Lokad/Terab](https://github.com/Lokad/Terab) maintained by Joannes Vermorel.</sup>
 
-<sup>2. SLP does not impose any restrictions on BCH output amounts. Typically however the OP_RETURN output would have 0 BCH (as any BCH sent would be burned), and outputs receiving tokens / mint batons would be sent only the minimal 'dust' amount of 0.00000546 BCH.</sup>
+<sup>2. SLP does not impose any restrictions on XEC output amounts. Typically however the OP_RETURN output would have 0 XEC (as any XEC sent would be burned), and outputs receiving tokens / mint batons would be sent only the minimal 'dust' amount of 0.00000546 XEC.</sup>
 
 ### MINT - Extended Minting Transaction
 #### (used with "baton" to increase supply)
@@ -261,7 +261,7 @@ As with GENESIS, the MINT allows to end the baton, or further pass on the baton 
 
 **Transaction outputs**:
 
-| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                      | BCH amount | Implied token amount (base units) |
+| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                      | XEC amount | Implied token amount (base units) |
 |------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|-----------------------------------|
 | 0    | OP_RETURN<br>&lt;lokad_id: 'SLP\x00'&gt; (4 bytes, ascii)<br>&lt;token_type: 1&gt; (1 to 2 byte integer)<br>&lt;transaction_type: 'MINT'&gt; (4 bytes, ascii)<br>&lt;token_id&gt; (32 bytes)<br>&lt;mint_baton_vout&gt; (0 bytes or 1 byte between 0x02-0xff)<br>&lt;additional_token_quantity&gt; (8 byte integer) | any        | 0                                 |
 | 1    | Token mint receiver                                                                                                                                                                                                                                           | any        | additional_token_quantity         |
@@ -272,13 +272,13 @@ As with GENESIS, the MINT allows to end the baton, or further pass on the baton 
 
 ### SEND - Spend Transaction
 #### (Send / Transfer)
-The following transaction format is used to transfer tokens from one or more token holding UTXO(s) to new token holding UTXO(s). The UTXOs associated with unspent tokens will be used within the transaction input and, just like the BCH attached to these UTXOs, will be considered totally spent after this transaction is accepted by the blockchain. Tokens will be assigned to new UTXOs vout=1 up to vout=19 as indicated within the OP_RETURN statement.  Any number of additional BCH-only outputs will be allowed. A BCH-only output can come before token outputs, but a token quantity of 0 must be specified for this output.
+The following transaction format is used to transfer tokens from one or more token holding UTXO(s) to new token holding UTXO(s). The UTXOs associated with unspent tokens will be used within the transaction input and, just like the XEC attached to these UTXOs, will be considered totally spent after this transaction is accepted by the blockchain. Tokens will be assigned to new UTXOs vout=1 up to vout=19 as indicated within the OP_RETURN statement.  Any number of additional XEC-only outputs will be allowed. A XEC-only output can come before token outputs, but a token quantity of 0 must be specified for this output.
 
 **Transaction inputs**: Any number of inputs or content of inputs, in any order, but must include sufficient tokens coming from valid token transactions of matching `token_id`, `token_type` (see Consensus Rules).
 
 **Transaction outputs**:
 
-| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                                                                                  | BCH amount | Implied token amount (base units) |
+| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                                                                                  | XEC amount | Implied token amount (base units) |
 |------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|-----------------------------------|
 | 0    | OP_RETURN<br>&lt;lokad id: 'SLP\x00'&gt; (4 bytes, ascii)<br>&lt;token_type: 1&gt; (1 to 2 byte integer)<br>&lt;transaction_type: 'SEND'&gt; (4 bytes, ascii)<br>&lt;token_id&gt; (32 bytes)<br>&lt;token_output_quantity1&gt; (required, 8 byte integer)<br>&lt;token_output_quantity2&gt; (optional, 8 byte integer)<br>...<br>&lt;token_output_quantity19&gt; (optional, 8 byte integer)<br>| any        | 0                                 |
 | 1    | Receiver 1                                                                                                                                                                                                                                                                                                                | any        | token_output_quantity1            |
@@ -304,7 +304,7 @@ Initial implementations will focus on supporting the consensus-based forms of va
 
 **Transaction outputs**:
 
-| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                                                                                   | BCH amount |
+| v<sub>out</sub> | ScriptPubKey ("Address")                                                                                                                                                                                                                                                                                                   | XEC amount |
 |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
 | 0    | OP_RETURN<br>&lt;lokad_id: 'SLP\x00'&gt; (4 bytes, ascii)<br>&lt;token_type: 1&gt; (1 to 2 byte integer)<br>&lt;transaction_type: 'COMMIT'&gt; (6 bytes, ascii)<br>&lt;token_id&gt; (32 bytes)<br>&lt;for_bitcoin_block_hash&gt; (32 bytes)<br>&lt;block_height&gt; (8 byte integer)<br>&lt;token_txn_set_hash&gt; (32 bytes)<br>&lt;txn_set_data_url&gt; (0 to ∞ bytes, ascii) [to be determined] | any        |
 | ...  | Any                                                                                                                                                                                                                                                                                                                        | any        |
@@ -399,7 +399,7 @@ Users have several methods for validating incoming transactions:
 
 3. **Wallet-integrated proxy validation.**  A wallet can query (via API) an infrastructure service such as BitDB to determine if an SLP transaction is valid.
 
-4. **Non-wallet proxy validation.**  Typically, users check their transactions on block explorers.   There is plethora of both token and non-token supporting block explorers in the broader cryptocurrency ecosystem.  BCH token block explorers are expected to flourish.
+4. **Non-wallet proxy validation.**  Typically, users check their transactions on block explorers.   There is plethora of both token and non-token supporting block explorers in the broader cryptocurrency ecosystem.  XEC token block explorers are expected to flourish.
 
 5. **Checkpoint based validation.**  The user checks each relevant UTXO input from the current transaction leading all the way back to a checkpoint provided by a trusted token token validator using a checksum commitment transaction. This involves a degree of trust in the token’s validator, however its actions are all recorded in the blockchain and attached to it’s identity, so it is easy to exclude a validator that’s been proven fraudulent.
 
@@ -430,17 +430,17 @@ The temporary incompatibility between a normal Bitcoin Cash wallet and an SLP wa
 
 Hierarchical deterministic wallets can be used for tokens.  To keep addresses separate from those that might have been generated using the same mnemonic seed, SLP wallets could use a different derivation path, a new BIP39 coin_type integer… or for a non-BIP39 wallet such as Electron Cash, a different salt value for bip32 based PBKDF2 key stretching.
 
-However, wallets can also choose to simply expect users to have a different wallet file for tokens vs regular BCH funds.
+However, wallets can also choose to simply expect users to have a different wallet file for tokens vs regular XEC funds.
 
 # SECTION III: FURTHER ANALYSIS
 
 ## Wallet Implementation
 
-SPV and/or light wallets such as Electron Cash or the Bitcoin.com wallet can be modified to support tokens in addition to regular BCH.  Several key considerations for such modification are described below.
+SPV and/or light wallets such as Electron Cash or the Bitcoin.com wallet can be modified to support tokens in addition to regular XEC.  Several key considerations for such modification are described below.
 
 ### Balance and History
 
-Wallets can be modified to incorporate token validation schemes (as discussed above in previous sections) to compute a token balance for each address the wallet manages, in addition to usual BCH balances that a wallet normally displays.
+Wallets can be modified to incorporate token validation schemes (as discussed above in previous sections) to compute a token balance for each address the wallet manages, in addition to usual XEC balances that a wallet normally displays.
 
 The wallet’s engine will receive a transaction history for the addresses it manages in the usual way, and in addition it will parse any transactions it sees with the relevant OP_RETURN messages (either genesis transactions or send/receive transactions).  It will then apply consensus and validation to filter out invalid "noise" or fake token transactions and collate the valid results appropriately to compute a balance and history for each token that it sees and for each address that it manages.
 
@@ -454,13 +454,13 @@ The most important principle that every token-wallet implementation must observe
 
 Wallets can use a separate set of key/address pairs, perhaps with a distinct derivation path as previously discussed. The best implementations will even avoid spending outputs with *any* OP_RETURN data, as they could be used for other token schemes or blockchain applications.
 
-Even if wallets maintain a separate set of addresses for SLP, it’s still possible to end up with token-holding UTXOs that also contain significant BCH (or vice-versa). Should the user wish to spend some of that BCH while leaving the token balance unchanged, wallet implementations should be able to handle this by sending change appropriately.
+Even if wallets maintain a separate set of addresses for SLP, it’s still possible to end up with token-holding UTXOs that also contain significant XEC (or vice-versa). Should the user wish to spend some of that XEC while leaving the token balance unchanged, wallet implementations should be able to handle this by sending change appropriately.
 
-Token spends should be managed by the wallet intelligently so as to minimize the amount of BCH associated with a token UTXO (preferably keeping token UTXOs at or close to the dust limit).
+Token spends should be managed by the wallet intelligently so as to minimize the amount of XEC associated with a token UTXO (preferably keeping token UTXOs at or close to the dust limit).
 
 ### Funding Transaction Fees
 
-Wallets may find that their token-holding UTXOs do not contain sufficient BCH funds to craft a transaction that spends a token.  When building an implementation, developers need to plan for making available extra funds to pay for fees, while keeping the boundary entact between different types of unspent outputs.
+Wallets may find that their token-holding UTXOs do not contain sufficient XEC funds to craft a transaction that spends a token.  When building an implementation, developers need to plan for making available extra funds to pay for fees, while keeping the boundary entact between different types of unspent outputs.
 
 ### Sending and Receiving
 

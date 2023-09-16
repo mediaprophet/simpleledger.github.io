@@ -19,7 +19,7 @@ When you open up [the SLP explorer](https://simpleledger.info), there is a searc
 **SLP Address** - Public receive address of SLP tokens.  
 **Cash Address** - Public receive address of Bitcoin Cash in Cash Address format.  
 **Legacy Address** - Public reveive address of Bitcoin Cash in Legacy format.   
-**Cash Account** - Publicly linked Cash Account used in sending BCH to a Cash Account alias instead of BCH address.  
+**Cash Account** - Publicly linked Cash Account used in sending XEC to a Cash Account alias instead of XEC address.  
 **Sent SLP Transactions** - Total number of sent SLP token transactions.  
 **Received SLP transactions** - Total number of received SLP token transactions.  
 **Token balances** - Balances of each SLP token within the address.  
@@ -47,7 +47,7 @@ Each address has an associated simpleledger, cashaddr & legacy address format. C
 3. **Send** 
 	- A standard SLP token "send" transaction on the blockchain. SLP Tokens and coins are stored in unspent transaction outputs or a utxo. If a token utxo (all or multiple tokens can be in one utxo) is split during the process, then the change from that split will be sent back to the wallet. This is typically done in the same address for SLP wallets (if they only use one address) but sometimes it can be sent to a new address (for wallets that use new change addreses). This can cause a send transaction to show a balance of the full utxo (or possibly your full balance) when viewed on the explorer. If you click into the transaction, you can view each output to see that the change of the tokens is sent back to you in new address and so it was counted towards the balance. 
 4. **Burn (Send)**
-	- Tokens are stored within a utxo attached to a small amount of Bitcoin Cash. The burning of a token happens when the BCH is disconnected from the SLP token, which is then destroyed (or burned). This can happen if SLP tokens are sent to a BCH only wallet (instead of a BCH/SLP wallet) or if tokens are purposely burned from inside a wallet with that capability, such as [Electron Cash SLP](https://simpleledger.cash/project/electron-cash-slp-edition/). 
+	- Tokens are stored within a utxo attached to a small amount of Bitcoin Cash. The burning of a token happens when the XEC is disconnected from the SLP token, which is then destroyed (or burned). This can happen if SLP tokens are sent to a XEC only wallet (instead of a XEC/SLP wallet) or if tokens are purposely burned from inside a wallet with that capability, such as [Electron Cash SLP](https://simpleledger.cash/project/electron-cash-slp-edition/). 
 
 ## Transaction Details
 
@@ -85,7 +85,7 @@ It also includes information about the transaction's inputs and outputs. This ca
 **Valid Txns Since Genesis** - Total number of valid transactions since genesis for a token.  
 **Valid Token UTXOs** - Total number of valid UTXOs (or outputs containing the token) since genesis for a token.  
 **Valid Token addresses** - Total number of valid addresses holding the token.  
-**Satoshis Locked Up** - Total number of BCH satoshis that are locked up within tokens. Each token requires a small amount of satoshis in order to exist.  
+**Satoshis Locked Up** - Total number of XEC satoshis that are locked up within tokens. Each token requires a small amount of satoshis in order to exist.  
 **Tokens Minted** - Total number tokens that have been minted, or created.         
 **Tokens Burned** - Total number of tokens that have been burned.  
 **Circulating Supply** - Total current circulating supply = Token Minted - Tokens Burned.

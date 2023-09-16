@@ -8,7 +8,7 @@ An address corresponds to a [public key](#pubkey) and is generally what you shar
 
 ## Base Unit
 
-The smallest possible unit of a token. For BCH this is referred to as [Satoshi](#satoshi). For SLP tokens it is just called base unit. For example, [SPICE](https://simpleledger.info/token/4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf) has Decimals of 8, so when you send 1 spice you are actually sending 10^8 SPICE, or 100000000 base units of SPICE. Compare this with [HONK](https://simpleledger.info/token/7f8889682d57369ed0e32336f8b7e0ffec625a35cca183f4e81fde4e71a538a1) which has Decimals of 0, so sending 1 HONK is the same as sending 1 base unit of HONK. It's easiest to think of the Decimals parameter as for visual purposes only, although many higher level libraries do operate in decimalized units rather than base units.
+The smallest possible unit of a token. For XEC this is referred to as [Satoshi](#satoshi). For SLP tokens it is just called base unit. For example, [SPICE](https://simpleledger.info/token/4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf) has Decimals of 8, so when you send 1 spice you are actually sending 10^8 SPICE, or 100000000 base units of SPICE. Compare this with [HONK](https://simpleledger.info/token/7f8889682d57369ed0e32336f8b7e0ffec625a35cca183f4e81fde4e71a538a1) which has Decimals of 0, so sending 1 HONK is the same as sending 1 base unit of HONK. It's easiest to think of the Decimals parameter as for visual purposes only, although many higher level libraries do operate in decimalized units rather than base units.
 
 ## Burn
 
@@ -36,7 +36,7 @@ Graph Search is a method of trustless validation which reconstructs the [DAG](#d
 
 ## Genesis
 
-The first transaction to create a token. For [Child NFTs](#child-nft) this involves burning a [Group NFT](#group-nft) token. However, for regula tokens you don't need any prior SLP - Genesis transactions can be created using only BCH [UTXOs](#utxo).
+The first transaction to create a token. For [Child NFTs](#child-nft) this involves burning a [Group NFT](#group-nft) token. However, for regula tokens you don't need any prior SLP - Genesis transactions can be created using only XEC [UTXOs](#utxo).
 
 ## Group NFT
 
@@ -44,7 +44,7 @@ Group NFTs act essentially as regular tokens, they can be minted or sent as norm
 
 ## Input
 
-Inputs are comprised of an [outpoint](#outpoint), a signature script to spend from the [script pubkey](#script-pubkey), and a sequence number which isn't really used. In short, inputs consume [UTXOs](#utxo) and the amount of BCH and SLP in each input determines how much that transaction can send in each [output](#output).
+Inputs are comprised of an [outpoint](#outpoint), a signature script to spend from the [script pubkey](#script-pubkey), and a sequence number which isn't really used. In short, inputs consume [UTXOs](#utxo) and the amount of XEC and SLP in each input determines how much that transaction can send in each [output](#output).
 
 ## Mint
 

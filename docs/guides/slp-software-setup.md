@@ -39,7 +39,7 @@ Make sure everything is installed without errors.
 ## SLP wallet
 Before moving on with the scripting, you’ll need some SLP addresses of your own to work with. If you already have some, feel free to skip these steps.
 
-First off, let’s get you an SLP compatible wallet. This will be the place where your freshly minted SLP tokens will reside, and also where you’ll have to send the required BCH to do so. 
+First off, let’s get you an SLP compatible wallet. This will be the place where your freshly minted SLP tokens will reside, and also where you’ll have to send the required XEC to do so. 
 After installing the software, we will make sure to keep the SLP address and it’s WIF.
 
 If you'd rather try things on testnet, you'll find a small comment after each section indicating the changes needed. To get testnet coins you can find several services, like 
@@ -95,7 +95,7 @@ In particular, DO NOT use 'redeem private key' services proposed by third partie
 L1aeBNDeQ43PtFN2Jc9tbeqhNiqBgDHbxMctefHftHw4WtSo621e
 ```
 
-As a last step, in order to send the needed BCH to the funding address, we need to make sure to use the Cash address format. For that conversion we will use the following call
+As a last step, in order to send the needed XEC to the funding address, we need to make sure to use the Cash address format. For that conversion we will use the following call
 
 ```bash
 > Electron-Cash-SLP-3.6.4.exe addressconvert qzvjfs5tuw56est4mwtzw3fegucgdwr00v0nkx3qwh
@@ -279,7 +279,7 @@ let balances;
 (async function() {
   balances = await bitboxNetwork.getAllSlpBalancesAndUtxos(fundingAddress);
   console.log("'balances' variable is set.");
-  console.log('BCH balance:', balances.satoshis_available_bch);
+  console.log('XEC balance:', balances.satoshis_available_bch);
 
 // 4) Set private keys
   balances.nonSlpUtxos.forEach(txo => txo.wif = fundingWif)
@@ -302,7 +302,7 @@ let balances;
 ```
 
 Here you’ll want to make sure to change the `fundingAddress`, `fundingWif`, `tokenReceiverAddress`, `bchChangeReceiverAddress` and `batonReceiverAddress` in the script to the ones you obtained 
-in the previous steps. Also, remember to send a small amount of BCH to the funding address. Keep in mind that if you choose to send the funds using a non-SLP compatible wallet, you'll need to 
+in the previous steps. Also, remember to send a small amount of XEC to the funding address. Keep in mind that if you choose to send the funds using a non-SLP compatible wallet, you'll need to 
 use the cashAddr format address. Some cents will be enough.
 
 Also, here you can edit the parameters of the new token. Feel free to change the `decimals`, `name`, `ticker`, `documentUri`, `documentHash` and `initialTokenQty` to match the desired specifications 
@@ -367,7 +367,7 @@ Which returns
 
 ```js
 'balances' variable is set.
-BCH balance: 86546
+XEC balance: 86546
 GENESIS txn complete: a17054f4cdb99fca43ad8ae218fd55c53814c02c450fb540a263edab5f1ac527
 ```
 

@@ -81,7 +81,7 @@ If burning is a feature of the SLP implementation, it should be made explicit to
 
 Wallet Functionality:
 
-- Preventing SLP UTXO's being spent as BCH without special warning.
+- Preventing SLP UTXO's being spent as XEC without special warning.
 - Perform double check on transactions that no burns are happening with different code paths
 - Performs full client side validation of all SLP validity
 - Require sending SLP to simple ledger addresses
@@ -105,10 +105,10 @@ Nice to have: an interface that puts user in control of whitelist choices.
 
 [high level]
 
-It’s important to use minimal sized utxos (dust limit) as it otherwise requires multiple outputs to split the BCH and SLP. SLP utxos should be just that - SLP.
+It’s important to use minimal sized utxos (dust limit) as it otherwise requires multiple outputs to split the XEC and SLP. SLP utxos should be just that - SLP.
 
 
-If you have SLP but no or little BCH you won’t be able to send. The wallet should handle this gracefully with a message for the user.
+If you have SLP but no or little XEC you won’t be able to send. The wallet should handle this gracefully with a message for the user.
 
 
 [tech level]
@@ -117,4 +117,4 @@ Create SLP utxos using dust limit (546 satoshis).
 
 Do not allow wallet to use utxos unless they have been validated as described above.
 
-Keep in mind, it is possible for receiving SLP utxos to be any sized BCH.
+Keep in mind, it is possible for receiving SLP utxos to be any sized XEC.

@@ -4,9 +4,9 @@
 
 First you will want to download [Electron Cash SLP Edition](https://github.com/simpleledger/Electron-Cash-SLP) this is the reference wallet and very good for learning and developing as it has every SLP feature built into it.
 
-## Get some Bitcoin Cash
+## Get some eCash
 
-You need BCH in order to create tokens. Fortunately, a very small amount. However, for testing you can use testnet BCH. These can be withdrawn at [faucet.fullstack.cash](https://faucet.fullstack.cash/). Remember to start the wallet in [testnet mode](/tooling/ecslp/#testnet) if using testnet tokens.
+You need XEC in order to create tokens. Fortunately, a very small amount. However, for testing you can use Grumpy (GRP). These can be withdrawn at [freexec.com](https://freexec.com/). Remember to start the wallet in [testnet mode](/tooling/ecslp/#testnet) if using testnet tokens.
 
 
 ## Create a Token
